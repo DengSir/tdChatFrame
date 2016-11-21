@@ -1,0 +1,6 @@
+## Interface: 70100.01
+## Title: tdChatFrame
+## Author: DengSir
+## Version: 70100.01.01
+
+Load.xml
