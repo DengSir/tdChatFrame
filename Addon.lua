@@ -20,6 +20,7 @@ local linktypes = {
     glyph        = true,
     instancelock = true,
     currency     = true,
+    keystone     = true,
 }
 
 local function OnHyperlinkEnter(frame, link)
