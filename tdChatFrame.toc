@@ -1,6 +1,8 @@
-## Interface: 70100.01
+## Interface: 80000
 ## Title: tdChatFrame
 ## Author: DengSir
-## Version: 70100.01.01
+## Version: 80000.01
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
 
 Load.xml
