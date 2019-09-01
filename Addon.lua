@@ -112,9 +112,11 @@ end
 
 CHAT_RAID_LEADER_GET = '|Hchannel:raid|h[团长]|h %s：\32'
 
-if not DEFAULT_CHAT_FRAME:IsUserPlaced() then
-    DEFAULT_CHAT_FRAME:SetHeight(220)
-end
+C_Timer.After(0, function()
+    if not DEFAULT_CHAT_FRAME:IsUserPlaced() then
+        DEFAULT_CHAT_FRAME:SetHeight(220)
+    end
+end)
 
 hooksecurefunc('RedockChatWindows', function()
     DEFAULT_CHAT_FRAME:SetHeight(220)
