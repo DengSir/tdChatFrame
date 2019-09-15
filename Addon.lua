@@ -3,24 +3,22 @@ Addon.lua
 @Author  : DengSir (tdaddon@163.com)
 @Link    : https://dengsir.github.io
 ]]
-
-
-local _G              = _G
+ local _G = _G
 local IsModifiedClick = IsModifiedClick
-local GameTooltip     = GameTooltip
+local GameTooltip = GameTooltip
 
 local linktypes = {
-    item         = true,
-    enchant      = true,
-    spell        = true,
-    quest        = true,
-    unit         = true,
-    talent       = true,
-    achievement  = true,
-    glyph        = true,
+    item = true,
+    enchant = true,
+    spell = true,
+    quest = true,
+    unit = true,
+    talent = true,
+    achievement = true,
+    glyph = true,
     instancelock = true,
-    currency     = true,
-    keystone     = true,
+    currency = true,
+    keystone = true,
 }
 
 local function OnHyperlinkEnter(frame, link)
@@ -34,13 +32,13 @@ end
 
 local function UpdateTooltip(self)
     if not self.comparing and IsModifiedClick('COMPAREITEMS') then
-        GameTooltip_ShowCompareItem(GameTooltip);
-        self.comparing = true;
+        GameTooltip_ShowCompareItem(GameTooltip)
+        self.comparing = true
     elseif self.comparing and not IsModifiedClick('COMPAREITEMS') then
         for _, frame in pairs(GameTooltip.shoppingTooltips) do
-            frame:Hide();
+            frame:Hide()
         end
-        self.comparing = false;
+        self.comparing = false
     end
 end
 
@@ -49,7 +47,9 @@ local function FCFOptionsDropDown_Initialize(dropdown, level)
         local chatFrame = FCF_GetCurrentChatFrame()
         local info = {}
         info.text = '清空聊天窗口'
-        info.func = function() chatFrame:Clear() end
+        info.func = function()
+            chatFrame:Clear()
+        end
         info.notCheckable = 1
         UIDropDownMenu_AddButton(info)
     end
@@ -94,17 +94,18 @@ end
 hooksecurefunc('FloatingChatFrame_OnLoad', initChatFrame)
 hooksecurefunc('FCFOptionsDropDown_OnLoad', initDropdown)
 
+hooksecurefunc('FCFDock_UpdateTabs', function(dock)
+    for index, chatFrame in ipairs(dock.DOCKED_CHAT_FRAMES) do
+        if not chatFrame.isStaticDocked then
+            local chatTab = _G[chatFrame:GetName() .. 'Tab']
+            PanelTemplates_TabResize(chatTab, chatTab.sizePadding or 0)
+        end
+    end
+end)
 
 ---- FlashTab
 
-local flashTabs = {
-    'RAID',
-    'PARTY',
-    'GUILD',
-    'OFFICER',
-    'RAID_LEADER',
-    'PARTY_LEADER',
-}
+local flashTabs = {'RAID', 'PARTY', 'GUILD', 'OFFICER', 'RAID_LEADER', 'PARTY_LEADER'}
 
 for i, v in ipairs(flashTabs) do
     ChatTypeInfo[v].flashTab = true
